@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "name": "kids_storytellers",
+      "description": "Children's story books with recurring characters",
+      "ages": ["0-2", "3-5", "6-8"],
+      "page_count": 24,
+      "character_style": "friendly, colorful, diverse"
+    },
+    {
+      "name": "word_search_kids",
+      "description": "Educational word search puzzles for children",
+      "ages": ["3-5", "6-8", "9-12"],
+      "page_count": 24
+    },
+    {
+      "name": "sudoku_puzzles",
+      "description": "Sudoku puzzles for kids and adults",
+      "ages": ["6-8", "9-12", "adults"],
+      "page_count": 24
+    },
+    {
+      "name": "gratitude_journal",
+      "description": "Morning gratitude journal for kids and adults",
+      "ages": ["6-8", "9-12", "adults"],
+      "page_count": 24
+    },
+    {
+      "name": "health_guide",
+      "description": "Simple health and wellness guides with illustrations",
+      "ages": ["6-8", "9-12", "adults"],
+      "page_count": 24
+    },
+    {
+      "name": "story_starters",
+      "description": "Creative writing prompts with illustration ideas",
+      "ages": ["6-8", "9-12", "adults"],
+      "page_count": 24
+    },
+    {
+      "name": "mandalas_adult",
+      "description": "Therapeutic mandala coloring pages",
+      "ages": ["9-12", "adults"],
+      "page_count": 24
+    }
+  ],
+  "kdp_specs": {
+    "dimensions": "8.5 x 8.5 inches",
+    "min_margin": 0.25,
+    "bleed": 0.125,
+    "font_min": 8,
+    "title_position": "center",
+    "author_position": "bottom_center"
+  }
+}

@@ -1,0 +1,94 @@
+# Trending and profitable keyword ideas for KDP books
+# Format: category|keyword|age_group|competition_score|demand_score
+# Based on public research data (Google Trends, Amazon Best Sellers, KDP Rocket)
+
+kids_storytellers|animals adventures|0-2|low|high
+kids_storytellers|princess magic|3-5|medium|high
+kids_storytellers|dinosaur fun|3-5|low|high
+kids_storytellers|space heroes|6-8|low|medium
+kids_storytellers|ocean friends|3-5|low|high
+kids_storytellers|forest animals|0-2|low|high
+kids_storytellers|medieval dragons|6-8|medium|medium
+kids_storytellers|underwater quest|3-5|low|high
+kids_storytellers|farm adventures|0-2|low|high
+kids_storytellers|candy kingdom|3-5|low|high
+kids_storytellers|puppy tales|0-2|low|high
+kids_storytellers|kitten stories|3-5|low|high
+kids_storytellers|bunny adventures|0-2|low|high
+kids_storytellers|magic forest|6-8|low|medium
+kids_storytellers|castle kingdom|3-5|low|high
+kids_storytellers|rainbow stories|3-5|low|high
+
+word_search_kids|animals|3-5|low|high
+word_search_kids|food words|3-5|low|high
+word_search_kids|colors|0-2|low|high
+word_search_kids|ocean theme|3-5|low|high
+word_search_kids|dinosaur words|3-5|low|high
+word_search_kids|space words|6-8|low|high
+word_search_kids|farm animals|0-2|low|high
+word_search_kids|body parts|6-8|low|medium
+word_search_kids|weather words|3-5|low|high
+word_search_kids|transportation|3-5|low|high
+word_search_kids|shapes|0-2|low|high
+word_search_kids|numbers|0-2|low|high
+word_search_kids|family words|3-5|low|high
+word_search_kids|jungle animals|3-5|low|high
+
+sudoku_puzzles|easy sudoku|9-12|low|medium
+sudoku_puzzles|medium sudoku|9-12|low|high
+sudoku_puzzles|kids sudoku|6-8|low|high
+sudoku_puzzles|large print sudoku|adults|low|high
+sudoku_puzzles|easy puzzles|6-8|low|high
+sudoku_puzzles|beginner sudoku|9-12|low|high
+sudoku_puzzles|quick puzzles|adults|low|high
+sudoku_puzzles|travel sudoku|adults|low|medium
+sudoku_puzzles|6x6 sudoku|6-8|low|high
+sudoku_puzzles|4x4 sudoku|6-8|low|high
+
+gratitude_journal|sunrise gratitude|adults|low|medium
+gratitude_journal|daily reflection|adults|low|high
+gratitude_journal|kids gratitude|6-8|low|high
+gratitude_journal|morning mindset|adults|low|high
+gratitude_journal|positive journaling|9-12|low|medium
+gratitude_journal|thankful thoughts|6-8|low|high
+gratitude_journal|blessings journal|adults|low|high
+gratitude_journal|happy moments|3-5|low|high
+gratitude_journal|peaceful thoughts|adults|low|medium
+gratitude_journal|kindness journal|9-12|low|high
+
+health_guide|healthy habits|6-8|low|high
+health_guide|fitness fun|9-12|low|high
+health_guide|mindfulness for kids|6-8|low|high
+health_guide|healthy snacks|3-5|low|high
+health_guide|sleep hygiene|6-8|low|high
+health_guide|brain power|9-12|low|high
+health_guide|emotional wellness|6-8|low|high
+health_guide|dental care|3-5|low|high
+health_guide|hand washing|3-5|low|high
+health_guide|mindful eating|adults|low|medium
+health_guide|movement fun|6-8|low|high
+health_guide|water hydration|3-5|low|high
+
+story_starters|magic carpet|6-8|low|high
+story_starters|treasure map|6-8|low|high
+story_starters|time machine|9-12|low|high
+story_starters|space adventure|6-8|low|high
+story_starters|underwater exploration|9-12|low|high
+story_starters|fairy tales|3-5|low|high
+story_starters|dragon stories|6-8|low|high
+story_starters|castle kingdom|6-8|low|high
+story_starters|pirate adventure|6-8|low|high
+story_starters|animal tales|3-5|low|high
+story_starters|magic wand|3-5|low|high
+story_starters|superhero stories|6-8|low|high
+
+mandalas_adult|ocean mandalas|adults|low|high
+mandalas_adult|flower mandalas|adults|low|high
+mandalas_adult|animal mandalas|adults|low|high
+mandalas_adult|geometric designs|adults|low|medium
+mandalas_adult|nature mandalas|adults|low|high
+mandalas_adult|abstract patterns|adults|low|high
+mandalas_adult|spiral designs|adults|low|high
+mandalas_adult|zen mandalas|adults|low|high
+mandalas_adult|colorful patterns|adults|low|high
+mandalas_adult|symmetry designs|adults|low|high
