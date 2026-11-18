@@ -1,0 +1,5 @@
+reportlab>=4.0.0
+fpdf2>=2.7.0
+pillow>=10.0.0
+requests>=2.31.0
+python-levenshtein>=0.25.0
