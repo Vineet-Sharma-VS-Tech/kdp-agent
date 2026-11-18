@@ -3,6 +3,18 @@ name: Generate KDP Book
 on:
   workflow_dispatch:
     inputs:
+      category:
+        description: 'Select Category'
+        required: true
+        type: choice
+        options:
+          - kids_storytellers
+          - word_search_kids
+          - sudoku_puzzles
+          - gratitude_journal
+          - health_guide
+          - story_starters
+          - mandalas_adult
       book_id:
         description: 'Book ID to generate'
         required: true
