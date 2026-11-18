@@ -26,45 +26,104 @@ def calculate_spine_width(page_count, paper_type='white', gsm=80):
         thickness = page_count * 0.00225
     return thickness * inch
 
-def create_interior_pdf(filepath, title, author, pages_content, character_name=None):
+def generate_sudoku_grid(difficulty='easy'):
+    """Generate a simple Sudoku grid (partial for sample)"""
+    import random
+    grid = [[0 for _ in range(9)] for _ in range(9)]
+    # Very basic: fill some numbers
+    for i in range(15 if difficulty == 'easy' else 10):
+        r, c = random.randint(0, 8), random.randint(0, 8)
+        grid[r][c] = random.randint(1, 9)
+    return grid
+
+def create_interior_pdf(filepath, title, author, pages_content, category, age_group, character_name=None):
     """
     Create interior PDF for 8.5" x 8.5" book
-    pages_content: list of dicts with 'content', 'page_type' keys
     """
     c = canvas.Canvas(filepath, pagesize=(PAGE_WIDTH, PAGE_HEIGHT))
 
     for i, page in enumerate(pages_content):
         page_num = i + 1
 
-        # Title page handling
         if page['page_type'] == 'title':
-            c.setFont("Helvetica-Bold", 48)
-            c.drawCentredString(PAGE_WIDTH/2, PAGE_HEIGHT/2 + 0.5*inch, title)
-            c.setFont("Helvetica", 24)
-            c.drawCentredString(PAGE_WIDTH/2, PAGE_HEIGHT/2 - 0.5*inch, author)
+            c.setFont("Helvetica-Bold", 36)
+            y = PAGE_HEIGHT - 2*inch
+            for line in title.split(':'):
+                c.drawCentredString(PAGE_WIDTH/2, y, line.strip())
+                y -= 0.5*inch
 
-            # Page number
-            c.setFont("Helvetica", 12)
-            c.drawCentredString(PAGE_WIDTH/2, MARGIN/2, str(page_num))
+            c.setFont("Helvetica", 18)
+            c.drawCentredString(PAGE_WIDTH/2, 2*inch, f"A {category.replace('_', ' ').title()}")
+            if character_name:
+                c.drawCentredString(PAGE_WIDTH/2, 1.5*inch, f"Featuring {character_name}")
 
-        # Cover page handling
-        elif page['page_type'] == 'cover':
-            _draw_cover_page(c, page)
         else:
-            # Regular content page
-            c.setFont("Helvetica", 14)
-            text_obj = c.beginText(MARGIN, PAGE_HEIGHT - MARGIN)
-            text_obj.textLines(page.get('content', ''))
-            c.drawText(text_obj)
+            # Draw header
+            c.setFont("Helvetica-Bold", 14)
+            c.drawString(MARGIN, PAGE_HEIGHT - MARGIN, title[:40] + "..." if len(title) > 40 else title)
 
-            # Page number
-            c.setFont("Helvetica", 10)
-            c.drawCentredString(PAGE_WIDTH/2, MARGIN/2, str(page_num))
+            y = PAGE_HEIGHT - MARGIN - 0.5*inch
+
+            if category == 'kids_storytellers':
+                c.setFont("Helvetica", 12)
+                story_lines = [
+                    f"Chapter {page_num - 1}",
+                    "",
+                    f"Once upon a time, {character_name} was exploring the candy kingdom.",
+                    "The gumdrop trees were shimmering in the sunlight.",
+                    f"'{character_name.split()[0]}!' called a friendly marshmallow bird.",
+                    "There was a mysterious path made of chocolate bars leading deep into the woods.",
+                    "",
+                    "[Illustration space for consistent character poses]"
+                ]
+                for line in story_lines:
+                    c.drawString(MARGIN, y, line)
+                    y -= 0.2*inch
+
+            elif category == 'word_search_kids':
+                c.setFont("Courier-Bold", 14)
+                c.drawString(MARGIN, y, "FIND THE HIDDEN WORDS!")
+                y -= 0.4*inch
+                words = ["FISH", "OCEAN", "MAGIC", "BRAVE", "LUNA", "PIXIE"]
+                grid = generate_word_search_puzzle(random.choice(words), 12)
+                for row in grid:
+                    c.drawCentredString(PAGE_WIDTH/2, y, "  ".join(row))
+                    y -= 0.25*inch
+                y -= 0.5*inch
+                c.setFont("Helvetica-Bold", 10)
+                c.drawString(MARGIN, y, "WORDS TO FIND: " + ", ".join(words))
+
+            elif category == 'sudoku_puzzles':
+                c.setFont("Helvetica-Bold", 18)
+                c.drawCentredString(PAGE_WIDTH/2, y, f"Sudoku Puzzle #{page_num - 1}")
+                y -= 0.5*inch
+                grid = generate_sudoku_grid()
+                cell_size = 0.4*inch
+                start_x = (PAGE_WIDTH - 9*cell_size)/2
+                for r in range(10):
+                    c.line(start_x, y - r*cell_size, start_x + 9*cell_size, y - r*cell_size)
+                    c.line(start_x + r*cell_size, y, start_x + r*cell_size, y - 9*cell_size)
+
+                c.setFont("Helvetica-Bold", 14)
+                for r in range(9):
+                    for col in range(9):
+                        val = grid[r][col]
+                        if val != 0:
+                            c.drawCentredString(start_x + col*cell_size + cell_size/2, y - r*cell_size - cell_size + 5, str(val))
+
+            else:
+                c.setFont("Helvetica", 12)
+                c.drawString(MARGIN, y, f"Welcome to page {page_num} of your {category.replace('_', ' ')}!")
+                c.drawString(MARGIN, y - 0.3*inch, "Write your thoughts and feelings here...")
+                c.line(MARGIN, y - 0.6*inch, PAGE_WIDTH - MARGIN, y - 0.6*inch)
+                c.line(MARGIN, y - 1.0*inch, PAGE_WIDTH - MARGIN, y - 1.0*inch)
+                c.line(MARGIN, y - 1.4*inch, PAGE_WIDTH - MARGIN, y - 1.4*inch)
+
+            # Footer
+            c.setFont("Helvetica", 8)
+            c.drawCentredString(PAGE_WIDTH/2, MARGIN/2, f"Page {page_num} | Copyright (c) 2024")
 
         c.showPage()
-
-    # Add back cover
-    _add_back_cover(c, title, character_name)
 
     c.save()
     return filepath

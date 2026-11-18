@@ -41,7 +41,7 @@ def cmd_research():
         print(f"   {i}. {t['title']} - ${t['estimated_price']}")
     print(f"\n   Full list saved to: src/trending_ideas.json")
 
-def cmd_list():
+def cmd_list(category=None):
     """List available book ideas"""
     ideas_file = "src/trending_ideas.json"
     if not os.path.exists(ideas_file):
@@ -55,6 +55,8 @@ def cmd_list():
     print("=" * 60)
 
     for idea in data.get('top_trends', []):
+        if category and idea['category'] != category:
+            continue
         char_info = f" [{idea['character']}]" if idea.get('character') else ""
         print(f"\nID: {idea['id']}")
         print(f"   Title: {idea['title']}{char_info}")
@@ -88,25 +90,19 @@ def cmd_generate(idea_id: int):
     print(f"📖 Generating book: {idea['title']}")
     ensure_output_dirs()
 
-    # Generate interior pages
+    # Generate interior pages (48 pages total as requested)
     pages = []
-    for page_num in range(1, 25):
+    for page_num in range(1, 49):
         if page_num == 1:
             pages.append({
                 'page_type': 'title',
                 'content': idea['title'],
                 'character': idea.get('character')
             })
-        elif page_num == 24:
-            pages.append({
-                'page_type': 'cover',  # Simplified back cover
-                'content': '',
-                'character': idea.get('character')
-            })
         else:
             pages.append({
                 'page_type': 'content',
-                'content': f"Page {page_num}\n\n[Illustration: {idea.get('character', 'Character')}]\n\n[Story content for age group {idea['age_group']}]",
+                'content': f"Page {page_num}\n\n[Illustration space for: {idea.get('character', 'Character')}]\n\n[Content for age group {idea['age_group']}]",
                 'character': idea.get('character')
             })
 
@@ -117,7 +113,7 @@ def cmd_generate(idea_id: int):
     cover_path = f"output/pdfs/{filename}_cover.pdf"
 
     author = "Created by AI Agent"
-    create_interior_pdf(interior_path, idea['title'], author, pages, idea.get('character'))
+    create_interior_pdf(interior_path, idea['title'], author, pages, idea['category'], idea['age_group'], idea.get('character'))
     print(f"   ✅ Interior PDF: {interior_path}")
 
     # Create cover
@@ -166,6 +162,7 @@ def main():
 
     # List command
     list_parser = subparsers.add_parser('list', help='List available book ideas')
+    list_parser.add_argument('--category', type=str, help='Filter by category')
 
     # Generate command
     generate_parser = subparsers.add_parser('generate', help='Generate a complete book package')
@@ -176,7 +173,7 @@ def main():
     if args.command == 'research':
         cmd_research()
     elif args.command == 'list':
-        cmd_list()
+        cmd_list(args.category)
     elif args.command == 'generate':
         cmd_generate(args.id)
     else:
