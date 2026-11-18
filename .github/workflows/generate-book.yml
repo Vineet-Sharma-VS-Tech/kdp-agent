@@ -1,0 +1,39 @@
+name: Generate KDP Book
+
+on:
+  workflow_dispatch:
+    inputs:
+      book_id:
+        description: 'Book ID to generate'
+        required: true
+        default: '1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Research trends
+        run: python src/main.py research
+
+      - name: Generate book package
+        run: python src/main.py generate --id ${{ github.event.inputs.book_id }}
+
+      - name: Upload book artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: kdp-book-package
+          path: output/*.zip
+          if-no-files-found: error
+          retention-days: 30
